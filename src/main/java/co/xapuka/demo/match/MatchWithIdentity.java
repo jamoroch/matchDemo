@@ -3,17 +3,17 @@ package co.xapuka.demo.match;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-public class ObjectMatch<T> implements WithAnyOf<T> {
+ final class MatchWithIdentity<T> implements MatchOps<T> {
 
     private final T value;
 
-    ObjectMatch(T value) {
+    MatchWithIdentity(T value) {
         this.value = value;
     }
 
-    @Override
-    public boolean withAnyOf(T... possibleValues) {
-        if (null == value) {
+    @SafeVarargs
+    public final boolean withAnyOf(T... possibleValues) {
+        if (value == null) {
             return false;
         }
         return Stream.of(possibleValues).filter(Objects::nonNull).anyMatch(x -> value == x);

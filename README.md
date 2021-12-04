@@ -1,2 +1,2 @@
 # matchDemo
-A POC of how to avoid complex nested ifs
+A POC on how to avoid complex nested conditionals

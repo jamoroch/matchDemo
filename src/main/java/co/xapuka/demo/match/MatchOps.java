@@ -1,5 +1,5 @@
 package co.xapuka.demo.match;
 
-public interface WithAnyOf<T> {
+public interface MatchOps<T> {
     boolean withAnyOf(T... possibleValues);
 }
