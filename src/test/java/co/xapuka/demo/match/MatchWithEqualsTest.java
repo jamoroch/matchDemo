@@ -2,6 +2,8 @@ package co.xapuka.demo.match;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Predicate;
+
 import static co.xapuka.demo.match.Task.TaskType.DIFFICULT;
 import static co.xapuka.demo.match.Task.TaskType.IMPOSIBLE;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -42,6 +44,11 @@ class MatchWithEqualsTest {
     @Test
     public void shouldNotMatchDifferentEnums() {
         assertFalse(Match.usingEquals(IMPOSIBLE).withAnyOf(DIFFICULT));
+    }
+
+    @Test
+    public void usePredicates() {
+        assertTrue(Match.theseUsingEquals(0, 7, 42).test(7));
     }
 
 }

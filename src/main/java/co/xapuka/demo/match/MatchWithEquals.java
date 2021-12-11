@@ -1,6 +1,7 @@
 package co.xapuka.demo.match;
 
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
  final class MatchWithEquals<T> implements MatchOps<T> {
@@ -11,12 +12,13 @@ import java.util.stream.Stream;
         this.value = value;
     }
 
-    @Override
+     public static <T> Predicate<T> toPredicate(T[] possibleValues) {
+         return value -> Objects.nonNull(value) && Stream.of(possibleValues).filter(Objects::nonNull).anyMatch(value::equals);
+     }
+
+     @Override
     @SafeVarargs
     public final boolean withAnyOf(T... possibleValues) {
-        if (value == null) {
-            return false;
-        }
-        return Stream.of(possibleValues).filter(Objects::nonNull).anyMatch(value::equals);
+        return toPredicate(possibleValues).test(value);
     }
 }

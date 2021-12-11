@@ -2,6 +2,8 @@ package co.xapuka.demo.match;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Predicate;
+
 import static co.xapuka.demo.match.Task.TaskType.DIFFICULT;
 import static co.xapuka.demo.match.Task.TaskType.IMPOSIBLE;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -43,4 +45,8 @@ class MatchWithIdentityTest {
         assertTrue(Match.usingIdentity(IMPOSIBLE).withAnyOf(IMPOSIBLE));
     }
 
+    @Test
+    public void usePredicates() {
+        assertTrue(Match.theseUsingIdentity(0, 7, 42).test(7));
+    }
 }
